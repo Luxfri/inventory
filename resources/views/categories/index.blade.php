@@ -21,9 +21,9 @@
                 <tr>
                     <td>{{ $category->name }}</td>
                     <td>
-                        <a href="{{ route('categories.edit', $category) }}" class="btn btn-edit">Edit</a>
-
                         @if (auth()->user()->role === 'admin')
+                            <a href="{{ route('categories.edit', $category) }}" class="btn btn-edit">Edit</a>
+
                             <form class="inline" method="POST"
                                   action="{{ route('categories.destroy', $category) }}"
                                   onsubmit="return confirm('Yakin hapus kategori ini?')">
@@ -31,6 +31,8 @@
                                 @method('DELETE')
                                 <button class="btn btn-danger" type="submit">Hapus</button>
                             </form>
+                        @else
+                            <span style="color:#999">Khusus admin</span>
                         @endif
                     </td>
                 </tr>
