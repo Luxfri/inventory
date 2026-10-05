@@ -7,6 +7,8 @@
         body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
         nav { display: flex; justify-content: space-between; align-items: center;
               background: #fff; padding: 12px 20px; border-radius: 6px; margin-bottom: 20px; }
+        nav a { color: #2563eb; text-decoration: none; }
+        nav a:hover { text-decoration: underline; }
         table { width: 100%; border-collapse: collapse; background: #fff; }
         th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
         .btn { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; text-decoration: none; font-size: 14px; }
@@ -30,6 +32,10 @@
                 <a href="{{ route('products.index') }}">Produk</a>
                 &nbsp;|&nbsp;
                 <a href="{{ route('categories.index') }}">Kategori</a>
+                @if (auth()->user()->role === 'admin')
+                    &nbsp;|&nbsp;
+                    <a href="{{ route('users.index') }}">User</a>
+                @endif
             @endauth
         </div>
         <div>
@@ -48,7 +54,11 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
+    @if (session('error'))
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    @endif
+
     @yield('content')
 
 </body>
-</html> 
+</html>
